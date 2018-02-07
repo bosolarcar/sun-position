@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^8.0.58"
+    "@types/node": "^8.0.58",
+    "jasmine": "^3.0.0"
   },
   "dependencies": {
     "@types/node": "^8.0.58",

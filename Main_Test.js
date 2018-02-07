@@ -22,5 +22,10 @@ var Startup = /** @class */ (function () {
     };
     return Startup;
 }());
+
+function helloWorld() {
+    return 'Hello world!';
+}
+
 Startup.main();
 //# sourceMappingURL=Main_Test.js.map

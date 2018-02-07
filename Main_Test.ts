@@ -5,6 +5,11 @@ var moment = require('moment-timezone');
 
 class Startup {
     public static main(){
+       
+
+
+
+
         //var mom = moment.utc("2015-06-12 15:34:11 GMT+0200 (CEST)", "YYYY-MM-DD HH:mm:ss ZZ");
         var mom = moment.utc("2018-02-07 14:00:00", "YYYY-MM-DD HH:mm:ss");
         var lat = 51.47625;
@@ -25,6 +30,13 @@ class Startup {
         console.log("ZenithAngle: " +result.getZenithAngle());   //44.1425   //Winkel Zwischen Zenit und dem Zenter der Sonne
         console.log('____________end test');
     }
+
+
+    
 }
+
+function helloWorld() {
+    return 'Hello world!';
+  }
 
 Startup.main();
