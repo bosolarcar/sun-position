@@ -1,9 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var AzimuthZenithAngle_1 = require("./AzimuthZenithAngle");
-var GregorianCalendarFormat = require('gregorian-calendar-format');
-var GregorianCalendar = require('gregorian-calendar');
-var gregorianCalendar = new GregorianCalendar();
+var moment = require('moment-timezone');
 var Test_Grena3 = /** @class */ (function () {
     function Test_Grena3(azimuth, zenithAngle) {
         this.zenithAngle = zenithAngle;
@@ -11,8 +9,9 @@ var Test_Grena3 = /** @class */ (function () {
     }
     Test_Grena3.prototype.calculateSolarPosition = function (date, latitude, longitude, deltaT, pressure, temperature) {
         var t = this.calcT(date);
-        t = -16273.434594455084;
-        console.log('calcT: ' + t);
+        //console.log('Test calcT: ' + t);
+        //t = -16273.434594455084;
+        //console.log('Soll calcT: ' + t);
         var tE = t + 1.1574e-5 * deltaT;
         var omegaAtE = 0.0172019715 * tE;
         var lambda = -1.388803 + 1.720279216e-2 * tE + 3.3366e-2 * Math.sin(omegaAtE - 0.06172)
@@ -50,29 +49,20 @@ var Test_Grena3 = /** @class */ (function () {
         return new AzimuthZenithAngle_1.AzimuthZenithAngle2(this.rad2deg(gamma + Math.PI) % 360.0, this.rad2deg(z));
     };
     Test_Grena3.prototype.calcT = function (date) {
-        var utc = new GregorianCalendar();
+        var utc = new moment.utc();
         utc = date;
-        var monthf = new GregorianCalendarFormat('M');
-        var yearf = new GregorianCalendarFormat('y');
-        var dayf = new GregorianCalendarFormat('d');
-        var hourf = new GregorianCalendarFormat('H');
-        var minf = new GregorianCalendarFormat('m');
-        var secf = new GregorianCalendarFormat('s');
-        //GregorianCalendar utc = JulianDate.createUtcCalendar(date);
-        var m = parseFloat(monthf.format(utc));
-        var y = parseFloat(yearf.format(utc));
-        var d = parseFloat(dayf.format(utc));
-        var h = parseFloat(hourf.format(utc)) +
-            parseFloat(minf.format(utc)) / 60 +
-            parseFloat(secf.format(utc)) / (60 * 60);
-        //console.log(h);
+        var m = parseFloat(utc.month()) + 1;
+        var y = parseFloat(utc.year());
+        var d = parseFloat(utc.date());
+        var h = parseFloat(utc.hour()) +
+            parseFloat(utc.minute()) / 60 +
+            parseFloat(utc.second()) / (60 * 60);
         if (m <= 2) {
             m += 12;
             y -= 1;
         }
-        //Ergebnis weicht um -+2 ab von der Java Version
-        return (365.25 * (y - 2000)) + (30.6001 * (m + 1))
-            - (0.01 * y) + d + 0.0416667 * h - 21958;
+        return Math.floor(365.25 * (y - 2000)) + Math.floor(30.6001 * (m + 1))
+            - Math.floor(0.01 * y) + d + 0.0416667 * h - 21958;
     };
     //Umrechnung Grad zu Bogenmaß
     Test_Grena3.prototype.deg2rad = function (deg) {
@@ -81,11 +71,6 @@ var Test_Grena3 = /** @class */ (function () {
     //Umrechnung Bogenmaß zu Grad
     Test_Grena3.prototype.rad2deg = function (rad) {
         return (rad * 180.0 / Math.PI);
-    };
-    Test_Grena3.prototype.createUtcCalendar = function (fromCalendar) {
-        var utcCalendar = new GregorianCalendar();
-        utcCalendar.set(fromCalendar.getTimeInMillis, 'S');
-        return utcCalendar;
     };
     return Test_Grena3;
 }());

@@ -1,8 +1,6 @@
 import { AzimuthZenithAngle2 } from "./AzimuthZenithAngle";
 
-var GregorianCalendarFormat = require('gregorian-calendar-format');
-var GregorianCalendar = require('gregorian-calendar');
-var gregorianCalendar = new GregorianCalendar();
+var moment = require('moment-timezone');
 
 export class Test_Grena3{
     azimuth: number;
@@ -20,8 +18,9 @@ export class Test_Grena3{
     public calculateSolarPosition(date:Date,latitude:number,longitude:number,deltaT:number,pressure:number,temperature:number):AzimuthZenithAngle2 {
         
         var t:number = this.calcT(date);
-        t = -16273.434594455084;
-        console.log('calcT: ' + t);
+        //console.log('Test calcT: ' + t);
+        //t = -16273.434594455084;
+        //console.log('Soll calcT: ' + t);
 
         var tE:number = t + 1.1574e-5 * deltaT;
         var omegaAtE:number = 0.0172019715 * tE;
@@ -80,33 +79,23 @@ export class Test_Grena3{
 
 
     public calcT(date):number {
-        var utc = new GregorianCalendar();
+        var utc = new moment.utc();
         utc = date;
-        var monthf = new GregorianCalendarFormat('M');
-        var yearf = new GregorianCalendarFormat('y');
-        var dayf = new GregorianCalendarFormat('d');
-        var hourf = new GregorianCalendarFormat('H');
-        var minf = new GregorianCalendarFormat('m');
-        var secf = new GregorianCalendarFormat('s');
 
-        //GregorianCalendar utc = JulianDate.createUtcCalendar(date);
-        
-                var m:number = parseFloat(monthf.format(utc));
-                var y:number = parseFloat(yearf.format(utc));
-                var d:number = parseFloat(dayf.format(utc));
-                var h:number = parseFloat(hourf.format(utc)) +
-                parseFloat(minf.format(utc)) / 60 +
-                parseFloat(secf.format(utc)) / (60 * 60);
-                //console.log(h);
-        
+                var m:number = parseFloat(utc.month())+1;
+                var y:number = parseFloat(utc.year());
+                var d:number = parseFloat(utc.date());
+                var h:number = parseFloat(utc.hour()) +
+                parseFloat(utc.minute()) / 60 +
+                parseFloat(utc.second()) / (60 * 60);
+                
                 if (m <= 2) {
                     m += 12;
                     y -= 1;
                 }
-        
-                //Ergebnis weicht um -+2 ab von der Java Version
-                return  (365.25 * (y - 2000)) +  (30.6001 * (m + 1))
-                        -  (0.01 * y) + d + 0.0416667 * h - 21958;
+                
+                return  Math.floor(365.25 * (y - 2000)) +  Math.floor(30.6001 * (m + 1))
+                        -  Math.floor(0.01 * y) + d + 0.0416667 * h - 21958;
     }
 
     //Umrechnung Grad zu Bogenmaß
@@ -117,14 +106,6 @@ export class Test_Grena3{
     //Umrechnung Bogenmaß zu Grad
     public rad2deg(rad:number):number {
         return (rad * 180.0 / Math.PI);
-    }
-
-
-
-    public createUtcCalendar(fromCalendar) {
-        var utcCalendar = new GregorianCalendar();
-        utcCalendar.set(fromCalendar.getTimeInMillis,'S');
-        return utcCalendar;
     }
 
 }
