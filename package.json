@@ -1,21 +1,41 @@
 {
-  "name": "WS-VSC",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "sun-position_grena3",
+  "version": "1.0.4",
+  "description": "A npm module written in typescript for calculating the sun position including atmospheric refraction based on time and position data.",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
+    "build": "tsc",
     "test": "jasmine"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/bosolarcar/sun-position.git"
+  },
+  "keywords": [
+    "sun",
+    "position",
+    "grena3",
+    "sunposition"
+  ],
+  "author": "Alexander Janssen <alexander.janssen@hs-bochum.de>",
   "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/bosolarcar/sun-position/issues"
+  },
+  "homepage": "https://gitlab.com/bosolarcar/sun-position#README",
   "devDependencies": {
-    "@types/node": "^8.0.58",
-    "jasmine": "^3.0.0"
+    "gulp": "^3.9.1",
+    "gulp-typedoc": "^2.2.0",
+    "jasmine": "^3.1.0"
   },
   "dependencies": {
-    "@types/node": "^8.0.58",
-    "moment": "^2.20.1",
+    "@types/jasmine": "^2.8.6",
+    "@types/winston": "^2.3.8",
+    "moment": "^2.21.0",
     "moment-timezone": "^0.5.14"
   }
 }

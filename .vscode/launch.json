@@ -1,18 +1,15 @@
 {
-    // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
-    // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
-    // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
+            "name": "Debug Tests",
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/Test_Grena3.js",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+            "program": "${workspaceRoot}/node_modules/jasmine/bin/jasmine",
+            "stopOnEntry": false,
+            "cwd": "${workspaceRoot}",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceRoot}/dist"]
         }
     ]
 }
