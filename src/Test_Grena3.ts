@@ -109,9 +109,4 @@ export class Test_Grena3{
     }
 
 }
-
-//function calcSunPos(date:any, latitude:number, longitude:number, deltaT:number, pressure:number, temperature:number) {
-//    var tg3 = new Test_Grena3(0,0);
-//    return tg3.calculateSolarPosition(date, latitude, longitude, deltaT, pressure, temperature);
-//}
-
+module.exports = Test_Grena3;
