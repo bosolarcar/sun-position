@@ -1,6 +1,6 @@
 {
   "name": "sun-position_grena3",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A npm module written in typescript for calculating the sun position including atmospheric refraction based on time and position data.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
