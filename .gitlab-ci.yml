@@ -7,4 +7,5 @@ cache:
 all_tests:
   script:
    - npm install
+   - tsc -p tsconfig.json
    - node ./test/test.js
