@@ -1,4 +1,6 @@
+//This is an example for using the SunPosition-Module as NPM-Module
 //To run this example:
+//Install the SunPosition Algorithm: npm i sun-position_grena3
 //run terminal where this file is
 //type "node example.js"
 
