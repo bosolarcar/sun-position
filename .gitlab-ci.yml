@@ -7,4 +7,4 @@ cache:
 all_tests:
   script:
    - npm install
-   - node ./test/example.js
+   - node ./test/test.js
