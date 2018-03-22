@@ -22,7 +22,7 @@
     "sunposition"
   ],
   "author": "Alexander Janssen <alexander.janssen@hs-bochum.de>",
-  "license": "ISC",
+  "license" : "MIT License",
   "bugs": {
     "url": "https://gitlab.com/bosolarcar/sun-position/issues"
   },

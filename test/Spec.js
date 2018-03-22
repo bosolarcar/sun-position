@@ -22,8 +22,8 @@ describe("Grena3-Test", function() {
     aza = calcSunPos.calculateSolarPosition(mom, lat, long, 69, 1000, 20);
     console.log("Expect Azimuth: (" + aza.getAzimuth()+") ToBeCloseTo: (51.608, 0.01)");
     console.log("Expect ZenithAngle: (" + aza.getZenithAngle()+") ToBeCloseTo: (44.1425, 0.01)");
-    expect(result.getAzimuth()*100).toBeCloseTo(51.608 * 100,0);
-    expect(result.getZenithAngle()*100).toBeCloseTo(44.1425 * 100,0);
+    expect(aza.getAzimuth()*100).toBeCloseTo(51.608 * 100,0);
+    expect(aza.getZenithAngle()*100).toBeCloseTo(44.1425 * 100,0);
     console.log('____________end test');
     
   });

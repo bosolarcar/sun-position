@@ -1,6 +1,22 @@
+/**
+ * Calculate topocentric solar position, i.e. the location of the sun on the sky for a certain point in time on a
+ * certain point of the Earth's surface.
+ *
+ * This follows the no. 3 algorithm described in Grena, 'Five new algorithms for the computation of sun position
+ * from 2010 to 2110', Solar Energy 86 (2012) pp. 1323-1337.
+ *
+ * The algorithm is supposed to work for the years 2010 to 2110, with a maximum error of 0.01 degrees.
+ *
+ * This method does not perform refraction correction.
+ * 
+ * Author Alexander Janßen
+ */
+
 import { AzimuthZenithAngle2 } from "./AzimuthZenithAngle";
 
 var moment = require('moment-timezone');
+
+
 
 export class Test_Grena3{
     azimuth: number;
@@ -14,14 +30,23 @@ export class Test_Grena3{
 
 
 
-
+    /*Calculate topocentric solar position
+    *
+    * @param date           Observer's local date and time.
+    * @param latitude       Observer's latitude, in degrees (negative south of equator).
+    * @param longitude      Observer's longitude, in degrees (negative west of Greenwich).
+    * @param deltaT         Difference between earth rotation time and terrestrial time (or Universal Time and Terrestrial Time),
+    *                       in seconds. See http://asa.usno.navy.mil/SecK/DeltaT.html.
+    *                       For the year 2015, a reasonably accurate default would be 68.
+    * @param pressure       Annual average local pressure, in millibars (or hectopascals). Used for refraction
+    *                       correction of zenith angle. If unsure, 1000 is a reasonable default.
+    * @param temperature    Annual average local temperature, in degrees Celsius. Used for refraction correction of zenith angle.
+    * @return Topocentric   solar position (azimuth measured eastward from north)
+    * @see AzimuthZenithAngle
+    */
     public calculateSolarPosition(date:Date,latitude:number,longitude:number,deltaT:number,pressure:number,temperature:number):AzimuthZenithAngle2 {
         
         var t:number = this.calcT(date);
-        //console.log('Test calcT: ' + t);
-        //t = -16273.434594455084;
-        //console.log('Soll calcT: ' + t);
-
         var tE:number = t + 1.1574e-5 * deltaT;
         var omegaAtE:number = 0.0172019715 * tE;
 
@@ -75,9 +100,11 @@ export class Test_Grena3{
     }
 
 
-
-
-
+    /*Convert date and time into a Time-Scale.
+    *
+    * @param date           Observer's local date and time.
+    * @return number        date and time as Scale.
+    */
     public calcT(date:Date):number {
         var utc = new moment.utc();
         utc = date;
@@ -98,12 +125,12 @@ export class Test_Grena3{
                         -  Math.floor(0.01 * y) + d + 0.0416667 * h - 21958;
     }
 
-    //Umrechnung Grad zu Bogenmaß
+    //Conversion degrees to radians
     public deg2rad(deg:number):number {
         return (deg * Math.PI / 180.0);
     }
 
-    //Umrechnung Bogenmaß zu Grad
+    //Conversion radians to degrees
     public rad2deg(rad:number):number {
         return (rad * 180.0 / Math.PI);
     }

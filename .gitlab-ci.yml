@@ -10,3 +10,4 @@ all_tests:
    - npm install -g typescript
    - tsc -p tsconfig.json
    - node ./test/test.js
+   - npm test test/Spec.js

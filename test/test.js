@@ -1,4 +1,5 @@
-//Test the Package
+//Test the Package, not the npm Module!
+
 const Test_Grena3_1 = require("../dist/Test_Grena3.js");
 var aza = Test_Grena3_1.AzimuthZenithAngle2;
 const calcSunPos = new Test_Grena3_1(0, 0);
